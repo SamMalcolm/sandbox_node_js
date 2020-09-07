@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const request = require('request');
-/* GET home page. */
 
 router.post("/openid", (req, res) => {
 	console.log(req.method);
@@ -17,17 +16,12 @@ router.post("/openid", (req, res) => {
 	payload.state = "nr147";
 	payload.lti_message_hint = req.body.lti_message_hint;
 
-	var options = {
-		'method': 'POST',
-		'url': 'https://rmit-lab.instructure.com/api/lti/authorize_redirect',
-		formData: payload
-	};
-	request(options, function (error, response) {
-		if (error) throw new Error(error);
-		console.log(response.body);
-	});
+	const qs = Object.keys(payload)
+		.map(key => `${key}=${payload[key]}`)
+		.join('&');
 
-	res.render('index', { title: req.path });
+	// print query string
+	res.redirect('https://rmit-lab.instructure.com/api/lti/authorize_redirect?' + qs)
 
 
 })
