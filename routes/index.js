@@ -6,13 +6,13 @@ const request = require('request');
 router.post("/openid", (req, res) => {
 	let payload = {};
 	payload.redirect_uri = "https://sandbox-node-js.herokuapp.com/redirect";
-	payload.client_id = "10000000000004";
+	payload.client_id = "115150000000000151";
 	payload.login_hint = req.body.login_hint;
 	payload.state = "nr147";
 
 	var options = {
 		'method': 'POST',
-		'url': 'https://localhost:3000/api/lti/authorize_redirect',
+		'url': 'https://rmit-lab.instructure.com/api/lti/authorize_redirect',
 		formData: payload
 	};
 	request(options, function (error, response) {
