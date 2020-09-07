@@ -15,6 +15,7 @@ router.post("/openid", (req, res) => {
 	payload.client_id = "115150000000000151";
 	payload.login_hint = req.body.login_hint;
 	payload.state = "nr147";
+	payload.lti_message_hint = req.body.lti_message_hint;
 
 	var options = {
 		'method': 'POST',
