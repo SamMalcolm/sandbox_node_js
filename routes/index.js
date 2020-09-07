@@ -4,6 +4,12 @@ const request = require('request');
 /* GET home page. */
 
 router.post("/openid", (req, res) => {
+	console.log(req.method);
+	console.log(req.path);
+	console.log("body")
+	console.log(req.body);
+	console.log("params")
+	console.log(req.params);
 	let payload = {};
 	payload.redirect_uri = "https://sandbox-node-js.herokuapp.com/redirect";
 	payload.client_id = "115150000000000151";
