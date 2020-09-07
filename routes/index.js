@@ -37,6 +37,29 @@ router.post("/redirect", (req, res) => {
 
 })
 
+router.get("/oauth", (req, res) => {
+	let payload = {};
+	payload.code = req.query.code;
+	payload.grant_type = "authorization_code";
+	payload.client_id = "115150000000000152"
+	payload.client_secret = "Fhe4wMMOddTe3X47Lz4goFokxkrG5tRGsFrI55PiPRcwp22w2q4nx5RTEpWBxKTq";
+	payload.redirect_uri = "https://sandbox-node-js.herokuapp.com/oauth";
+	var options = {
+		'method': 'POST',
+		'url': 'https://rmit-lab.instructure.com/login/oauth2/token',
+		formData: payload
+	};
+	request(options, (err, response, body) => {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(response);
+			console.log(body);
+			res.render('index', { title: req.path });
+		}
+	});
+})
+
 router.get('*', function (req, res, next) {
 	console.log(req.method);
 	console.log(req.path);
