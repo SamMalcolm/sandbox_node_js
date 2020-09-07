@@ -15,6 +15,11 @@ router.post("/openid", (req, res) => {
 	payload.login_hint = req.body.login_hint;
 	payload.state = "nr147";
 	payload.lti_message_hint = req.body.lti_message_hint;
+	payload.scope = "openid";
+	payload.response_type = "id_token";
+	payload.response_mode = "form_post";
+	payload.nonce = "nr147";
+	payload.prompt = "none";
 
 	const qs = Object.keys(payload)
 		.map(key => `${key}=${payload[key]}`)
