@@ -9,7 +9,9 @@
 <body>
 	<h1>TEST APP | <%= title %></h1>
 	<% if (typeof files != "undefined" && files)  { %>
-	<script>console.log("<%#= files %>")</script>
+	<script>console.log("<%#= files %>")
+		let files = "<%#= files %>";
+	</script>
 	<% } %>
 </body>
 
