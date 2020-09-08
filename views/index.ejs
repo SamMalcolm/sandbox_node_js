@@ -16,8 +16,8 @@
 			document.querySelector(".container").innerHTML += html;
 		}
 
-		console.log("<%#= files %>")
-		let files = "<%#= files %>";
+		console.log("<%- JSON.stringify(files) %>")
+		let files = "<%- JSON.stringify(files) %>";
 		files = JSON.parse(files);
 		for (let i = 0; i < files.length; i++) {
 			addImage(files[i].url);
