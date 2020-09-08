@@ -74,7 +74,9 @@ router.get("/oauth", (req, res) => {
 		} else {
 			let files = [];
 			if (body.access_token) {
+				console.log(body.access_token);
 				files = await getFiles(body.access_token, "485")
+				console.log(files);
 			}
 
 			res.render('index', { title: req.path, files: files });
