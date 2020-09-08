@@ -44,21 +44,20 @@ router.get("/redirect_local", (req, res) => {
 
 const getFiles = (access_token, course_id) => {
 	return new Promise((resolve, reject) => {
-		let options = {
-			"method": "GET",
-			"url": "https://rmit-lab.instructure.com/api/v1/courses" + course_id + "/files",
-			"headers": {
-				"Authorization": "Bearer " + access_token
+		var request = require('request');
+		var options = {
+			'method': 'GET',
+			'url': 'https://rmit-lab.instructure.com/api/v1/courses/' + course_id + '/files',
+			'headers': {
+				'Authorization': 'Bearer ' + access_token,
 			}
-		}
-		request(options, (err, response, body) => {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log(body);
-				resolve(body);
-			}
-		})
+		};
+		request(options, function (error, response) {
+			if (error) throw new Error(error);
+			console.log(response.body);
+			resolve(response.body);
+		});
+
 	})
 }
 
