@@ -8,9 +8,20 @@
 
 <body>
 	<h1>TEST APP | <%= title %></h1>
+	<div class="container"></div>
 	<% if (typeof files != "undefined" && files)  { %>
-	<script>console.log("<%#= files %>")
+	<script>
+		const addImage = src => {
+			let html = "<img src=\"" + src + "\" />";
+			document.querySelector(".container").innerHTML += html;
+		}
+
+		console.log("<%#= files %>")
 		let files = "<%#= files %>";
+		files = JSON.parse(files);
+		for (let i = 0; i < files.length; i++) {
+			addImage(files[i].url);
+		}
 	</script>
 	<% } %>
 </body>

@@ -83,7 +83,6 @@ router.get("/oauth", (req, res) => {
 			console.log(data.access_token);
 			files = await getFiles(data.access_token, "485")
 			console.log(files);
-			files = JSON.parse(files);
 			res.render('index', { title: req.path, files: files });
 		}
 	});
