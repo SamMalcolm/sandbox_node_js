@@ -8,7 +8,7 @@
 
 <body>
 	<h1>TEST APP | <%= title %></h1>
-	<% if (files)  { %>
+	<% if (typeof files != "undefined" && files)  { %>
 	<script>console.log("<%#= files %>")</script>
 	<% } %>
 </body>
