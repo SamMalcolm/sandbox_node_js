@@ -55,6 +55,7 @@ const getFiles = (access_token, course_id) => {
 			if (err) {
 				console.log(err);
 			} else {
+				console.log(body);
 				resolve(body);
 			}
 		})
@@ -80,8 +81,8 @@ router.get("/oauth", (req, res) => {
 			console.log(response.body);
 			let files = [];
 			if (body.access_token) {
-				console.log(body.access_token);
-				files = await getFiles(body.access_token, "485")
+				console.log(response.body.access_token);
+				files = await getFiles(response.body.access_token, "485")
 				console.log(files);
 			}
 
