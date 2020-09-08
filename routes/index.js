@@ -80,11 +80,10 @@ router.get("/oauth", (req, res) => {
 		} else {
 			console.log(response.body);
 			let files = [];
-			if (body.access_token) {
-				console.log(response.body.access_token);
-				files = await getFiles(response.body.access_token, "485")
-				console.log(files);
-			}
+			console.log(response.body.access_token);
+			files = await getFiles(response.body.access_token, "485")
+			console.log(files);
+
 
 			res.render('index', { title: req.path, files: files });
 		}
