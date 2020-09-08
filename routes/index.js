@@ -37,6 +37,25 @@ router.post("/redirect", (req, res) => {
 
 })
 
+const getFiles = (access_token, course_id) => {
+	return new Promise((resolve, reject) => {
+		let options = {
+			"method": "GET",
+			"url": "https://rmit-lab.instructure.com/api/v1/courses" + course_id + "/files",
+			"headers": {
+				"Authorization": "Bearer " + access_token
+			}
+		}
+		request(options, (err, response, body) => {
+			if (err) {
+				console.log(err);
+			} else {
+				resolve(body);
+			}
+		})
+	})
+}
+
 router.get("/oauth", (req, res) => {
 	let payload = {};
 	payload.code = req.query.code;
@@ -49,13 +68,16 @@ router.get("/oauth", (req, res) => {
 		'url': 'https://rmit-lab.instructure.com/login/oauth2/token',
 		formData: payload
 	};
-	request(options, (err, response, body) => {
+	request(options, async (err, response, body) => {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(response);
-			console.log(body);
-			res.render('index', { title: req.path });
+			let files = [];
+			if (body.access_token) {
+				files = await getFiles(body.access_token, "485")
+			}
+
+			res.render('index', { title: req.path, files: files });
 		}
 	});
 })
